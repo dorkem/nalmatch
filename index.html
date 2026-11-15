@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="카카오톡에서 링크로 공유하는 일정 조율 아이디어. 가능·불가 날짜를 표시하고 등록된 참여자의 응답을 모아보는 반응형 프론트엔드 데모입니다.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>날맞춤 — 일정 조율 프로토타입</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main class="demo-page">
+    <div class="demo-notice"><p><span class="demo-label">브라우저 전용 데모</span>입력한 내용은 현재 브라우저에만 저장돼요.</p><button type="button" class="demo-reset" data-reset-demo>데모 초기화</button><p class="demo-storage-status" data-storage-status role="status" aria-live="polite"></p></div>
+    <div id="meet-calendar-prototype" lang="ko" aria-label="날맞춤 일정 조율 화면">
+  <div class="meet-container">
+    <div class="meet-shell">
+      <div data-main-content>
+        <header class="meet-topbar">
+          <div class="meet-brand"><span class="meet-brand-icon"><span aria-hidden="true">✓</span></span>날맞춤</div>
+          <div class="meet-steps" aria-label="진행 단계">
+            <span class="meet-step current" data-step="name"><span class="meet-step-number">1</span>이름</span><span class="meet-step-line" aria-hidden="true"></span>
+            <span class="meet-step" data-step="calendar"><span class="meet-step-number">2</span>날짜</span><span class="meet-step-line" aria-hidden="true"></span>
+            <span class="meet-step" data-step="results"><span class="meet-step-number">3</span>결과</span>
+          </div>
+        </header>
+        <section data-calendar-view>
+          <div class="meet-intro">
+            <div><h1>우리 저녁 언제 볼까?</h1><p class="meet-subtitle" data-meeting-period>현재 월과 다음 월의 예시 일정</p></div>
+            <div class="meet-person"><span class="meet-avatar" data-avatar aria-hidden="true">?</span><div><div class="meet-person-name" data-display-name>참여자</div><button type="button" class="meet-quiet" data-edit-name>참여자 변경</button></div></div>
+          </div>
+          <div class="meet-workspace">
+            <section class="meet-calendar-area" aria-label="참여 가능한 날짜 선택">
+              <div class="meet-paint-tools" role="group" aria-label="날짜에 표시할 상태">
+                <button type="button" class="meet-mode" data-mode="yes" aria-pressed="true"><span class="meet-mode-mark" aria-hidden="true">✓</span>되는 날</button>
+                <button type="button" class="meet-mode" data-mode="no" aria-pressed="false"><span class="meet-mode-mark" aria-hidden="true">×</span>안 되는 날</button>
+              </div>
+              <p class="meet-hint" data-mode-hint>‘되는 날’을 누른 뒤 날짜를 선택해 주세요.</p>
+              <div class="meet-month-row">
+                <h2 class="meet-month" data-month-title></h2>
+                <div class="meet-month-actions"><button type="button" class="meet-month-button" data-prev-month aria-label="이전 달">‹</button><button type="button" class="meet-month-button" data-next-month aria-label="다음 달">›</button></div>
+              </div>
+              <div class="meet-weekdays" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+              <div class="meet-dates" data-calendar-grid role="group" aria-label="현재 월 날짜"></div>
+              <p class="meet-calendar-footnote">한 번 더 누르면 해제돼요. 표시하지 않은 날은 미정이에요.</p>
+            </section>
+            <aside class="meet-summary" aria-label="선택한 날짜 요약">
+              <h2>내가 표시한 날짜</h2>
+              <div class="meet-summary-group"><div class="meet-summary-label meet-summary-label-yes"><span>✓ 되는 날</span><span class="meet-count" data-yes-count>0일</span></div><div class="meet-date-chips" data-yes-dates></div></div>
+              <div class="meet-summary-group"><div class="meet-summary-label meet-summary-label-no"><span>× 안 되는 날</span><span class="meet-count" data-no-count>0일</span></div><div class="meet-date-chips" data-no-dates></div></div>
+              <div class="meet-save-block"><p class="meet-selected-total" data-selected-total aria-live="polite">달력에서 날짜를 선택해 주세요.</p><button type="button" class="meet-primary" data-save disabled>저장하고 결과 보기</button><p class="meet-save-status" data-save-status role="alert"></p></div>
+            </aside>
+          </div>
+        </section>
+        <section data-results-view hidden aria-label="모두의 일정 취합 결과">
+          <div class="meet-intro meet-results-intro">
+            <div><h1>참여자의 가능한 날</h1><p class="meet-subtitle" data-results-subtitle>4명의 응답을 모았어요.</p><p class="meet-sample-label">이 브라우저에 저장된 가상 참여자 기준입니다.</p></div>
+            <button type="button" class="meet-secondary" data-edit-dates>내 날짜 수정</button>
+          </div>
+          <div class="meet-result-banner" aria-live="polite"><strong data-best-date>모두 가능한 날을 확인해 보세요.</strong><span data-best-detail></span></div>
+          <div class="meet-workspace">
+            <section class="meet-calendar-area meet-results-calendar" aria-label="날짜별 가능한 인원">
+              <div class="meet-month-row"><h2 class="meet-month" data-results-month-title></h2><div class="meet-month-actions"><button type="button" class="meet-month-button" data-results-prev-month aria-label="결과 이전 달">‹</button><button type="button" class="meet-month-button" data-results-next-month aria-label="결과 다음 달">›</button></div></div>
+              <div class="meet-weekdays" aria-hidden="true"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+              <div class="meet-dates" data-results-grid role="group" aria-label="날짜별 응답 집계"></div>
+              <p class="meet-calendar-footnote">숫자는 가능 인원 / 등록 인원이에요. 날짜를 누르면 명단이 보여요.</p>
+            </section>
+            <aside class="meet-summary meet-result-sidebar" aria-label="선택한 날짜의 참여자 응답">
+              <div><h2 class="meet-selected-date" data-result-date-title></h2><p class="meet-result-status" data-result-status aria-live="polite"></p></div>
+              <div class="meet-summary-group"><div class="meet-summary-label meet-summary-label-yes"><span>✓ 가능</span><span class="meet-count" data-result-yes-count></span></div><div class="meet-person-chips" data-result-yes-names></div></div>
+              <div class="meet-summary-group"><div class="meet-summary-label meet-summary-label-no"><span>× 불가</span><span class="meet-count" data-result-no-count></span></div><div class="meet-person-chips" data-result-no-names></div></div>
+              <div class="meet-summary-group"><div class="meet-summary-label"><span>— 미정</span><span class="meet-count" data-result-unknown-count></span></div><div class="meet-person-chips" data-result-unknown-names></div></div>
+              <p class="meet-result-footnote">표시하지 않은 날짜는 미정이에요. 카카오톡방 전체 명단과는 연동되지 않아요.</p>
+              <div class="meet-summary-group"><h2>가능한 사람이 많은 날</h2><div class="meet-candidate-list" data-candidates></div></div>
+            </aside>
+          </div>
+        </section>
+      </div>
+      <section class="meet-overlay" data-name-overlay role="dialog" aria-modal="true" aria-labelledby="meet-name-title" aria-describedby="meet-name-description">
+        <div class="meet-name-card">
+          <h2 id="meet-name-title">누구로 참여할까요?</h2>
+          <p class="meet-name-description" id="meet-name-description">가상 참여자로 체험하거나 새 이름을 입력해 보세요.<br>저장한 날짜는 이 브라우저에서 다시 수정할 수 있어요.</p>
+          <div class="meet-existing-heading"><span>기존 참여자로 체험</span><span class="meet-existing-count" data-existing-count>4명</span></div>
+          <div class="meet-existing-list" data-participant-list role="group" aria-label="기존 참여자 목록"></div>
+          <p class="meet-scroll-hint">목록을 스크롤해서 내 이름을 선택하세요.</p>
+          <form class="meet-name-form" data-name-form novalidate>
+            <label for="meet-participant-name">처음 참여한다면</label><input class="meet-name-input" id="meet-participant-name" data-name-input name="participant-name" maxlength="20" placeholder="새 이름 입력" autocomplete="given-name" aria-describedby="meet-name-error" required>
+            <p class="meet-name-error" id="meet-name-error" data-name-error role="alert"></p>
+            <button type="submit" class="meet-primary">이 이름으로 참여하기</button>
+            <button type="button" class="meet-quiet meet-cancel-name" data-cancel-name hidden>돌아가기</button>
+          </form>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+    <p class="demo-footer">가상의 모임으로 화면 흐름을 체험하는 프로토타입입니다. 다른 기기와 응답이 동기화되지 않으며 카카오톡 공유 API는 아직 연결하지 않았습니다. <a href="https://github.com/dorkem/nalmatch">프로젝트 소개와 검증 기록</a></p>
+  </main>
+</body>
+</html>

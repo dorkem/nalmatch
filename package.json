@@ -1,0 +1,13 @@
+{
+  "name": "nalmatch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "날맞춤: 링크 공유로 일정 조율을 단순화하는 프론트엔드 프로토타입",
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
