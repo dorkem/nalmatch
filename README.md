@@ -4,7 +4,8 @@
 
 [직접 눌러보는 데모](https://dorkem.github.io/nalmatch/) · [카카오톡 공유 설계](docs/kakao-sharing.md) · [검증 기록](docs/validation.md)
 
-> **현재 단계: 반응형 프론트엔드 프로토타입**  
+> **현재 단계: 반응형 프론트엔드 프로토타입**
+>
 > 이름 입력 → 가능·불가 날짜 표시 → 참여자별 결과 취합을 체험할 수 있습니다. 입력은 **현재 브라우저에만 저장**되며, 다른 사람·기기와의 동기화와 카카오 API 연결은 구현 전입니다.
 
 [![날맞춤 데스크톱 취합 화면](assets/screenshots/desktop-results.jpg)](https://dorkem.github.io/nalmatch/)
